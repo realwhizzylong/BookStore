@@ -2,6 +2,10 @@ main {
     min-height: 80vh;
 }
 
+h3 {
+    padding: 1rem 0;
+}
+
 .rating i {
     color: gold;
 }
