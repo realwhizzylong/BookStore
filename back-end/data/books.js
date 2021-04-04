@@ -1,6 +1,5 @@
 const books = [
     {
-        _id: '1',
         title: 'Essential Calculus Skills Practice Workbook with Full Solutions',
         image: '/images/calculus.jpeg',
         author: 'Chris McMullen',
@@ -11,7 +10,6 @@ const books = [
         numReviews: 12,
     },
     {
-        _id: '2',
         title: 'The Mysteries of the Universe',
         image: '/images/universe.jpg',
         author: 'Will Gater',
@@ -22,7 +20,6 @@ const books = [
         numReviews: 8,
     },
     {
-        _id: '3',
         title: 'All The Lonely People',
         image: '/images/people.jpg',
         author: 'Mike Gayle',
@@ -33,7 +30,6 @@ const books = [
         numReviews: 12,
     },
     {
-        _id: '4',
         title: 'Python for Data Analysis',
         image: '/images/python.jpg',
         author: 'Wes Mckinney',
@@ -44,7 +40,6 @@ const books = [
         numReviews: 12,
     },
     {
-        _id: '5',
         title: 'The Paintings That Revolutionized Art',
         image: '/images/art.jpg',
         author: 'Claudia Stauble',
@@ -55,7 +50,6 @@ const books = [
         numReviews: 10,
     },
     {
-        _id: '6',
         title: 'The Western Front: A History of the First World War',
         image: '/images/history.jpg',
         author: 'Nick Lloyd',
