@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 
-const RegisterPage = () => {
+const RegisterPage = ({ location, register }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState(null);
+
+    const redirect = location.search ? location.search.split('=')[1] : '';
 
     useEffect(() => {
 
@@ -65,7 +67,7 @@ const RegisterPage = () => {
             </Form>
             <Row className="py-3">
                 <Col>
-                    Have an Account? <Link to={'/login'}>Log In</Link>
+                    Have an Account? <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Log In</Link>
                 </Col>
             </Row>
         </FormContainer>
