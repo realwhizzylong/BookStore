@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import books from './data/books.js';
 import users from './data/users.js';
-import Book from './models/bookSchema.js';
-import User from './models/userSchema.js';
-import Review from './models/reviewSchema.js';
+import Book from './schemas/bookSchema.js';
+import User from './schemas/userSchema.js';
+import Review from './schemas/reviewSchema.js';
 import connectDB from './config/db.js';
 
 dotenv.config();

@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler';
-import Book from '../models/bookSchema.js';
+import Book from '../schemas/bookSchema.js';
 
 export const getBooks = asyncHandler(async (req, res) => {
     const books = await Book.find({});
