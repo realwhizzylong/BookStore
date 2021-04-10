@@ -82,7 +82,7 @@ const RegisterPage = ({ location, history }) => {
             </Form>
             <Row className="py-3">
                 <Col>
-                    Have an Account? <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Log In</Link>
+                    Already Have an Account? <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Log In</Link>
                 </Col>
             </Row>
         </FormContainer>

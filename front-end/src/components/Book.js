@@ -21,7 +21,7 @@ const Book = ({ book }) => {
                 <Card.Text as="div">
                     {book.category}
                 </Card.Text>
-                <Card.Text as="div">
+                <Card.Text as="h6">
                     <Rating
                         value={book.rating}
                         text={`${book.numReviews} reviews`}
