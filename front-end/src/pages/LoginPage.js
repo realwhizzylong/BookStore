@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../actions/userAction';
 import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 
@@ -8,18 +10,27 @@ const LoginPage = ({ location, history }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const dispatch = useDispatch();
+
+    const { userInfo, error } = useSelector(state => state.login);
+
     const redirect = location.search ? location.search.split('=')[1] : '';
 
     useEffect(() => {
-    }, [])
+        if (userInfo) {
+            history.push(redirect);
+        }
+    }, [userInfo, history, redirect])
 
-    const submitHandler = () => {
-
+    const submitHandler = (e) => {
+        e.preventDefault();
+        dispatch(login(email, password));
     };
 
     return (
         <FormContainer>
             <h1>Log In</h1>
+            {error && <Message variant="danger">{error}</Message>}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId="email">
                     <Form.Label>Email</Form.Label>
