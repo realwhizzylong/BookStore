@@ -19,7 +19,7 @@ app.use(express.json());
 
 app.use('/books', bookRoutes);
 
-app.use('/', userRoutes);
+app.use('/users', userRoutes);
 
 app.use(notFound);
 

@@ -14,7 +14,7 @@ export const login = (email, password) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.post('/login', { email, password }, config);
+        const { data } = await axios.post('/users/login', { email, password }, config);
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data
@@ -35,7 +35,7 @@ export const register = (name, email, password) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.post('/register', { name, email, password }, config);
+        const { data } = await axios.post('/users/register', { name, email, password }, config);
         dispatch({
             type: REGISTER_SUCCESS,
             payload: data
