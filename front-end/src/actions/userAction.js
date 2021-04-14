@@ -4,7 +4,9 @@ import {
     LOGIN_FAIL,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    LOGOUT
+    LOGOUT,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_FAIL
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -58,4 +60,19 @@ export const logout = () => async (dispatch) => {
     dispatch({
         type: LOGOUT
     })
+}
+
+export const getUserDetails = (id) => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`/users/${id}`);
+        dispatch({
+            type: USER_DETAILS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: USER_DETAILS_FAIL,
+            payload: error.response.data.message
+        })
+    }
 }

@@ -50,3 +50,19 @@ export const register = asyncHandler(async (req, res) => {
         throw new Error('Invalid user data');
     }
 })
+
+export const getUserDetails = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+
+    if (user) {
+        res.status(201)
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email
+        })
+    } else {
+        res.status(400);
+        throw new Error('User not found');
+    }
+})

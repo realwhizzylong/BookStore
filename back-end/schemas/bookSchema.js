@@ -32,6 +32,11 @@ const bookSchema = mongoose.Schema(
             required: true,
             default: 0
         },
+        isSold: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
         rating: {
             type: Number,
             required: true,

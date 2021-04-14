@@ -1,21 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBookDetails } from '../actions/bookAction';
+import { getUserDetails } from '../actions/userAction';
 import Rating from '../components/Rating';
 import Message from '../components/Message';
 
 const BookScreen = ({ match, history }) => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+
     const bookId = match.params.id;
 
     const dispatch = useDispatch();
 
     const { book, error } = useSelector(state => state.bookDetails);
 
+    const { user } = useSelector(state => state.userDetails);
+
     useEffect(() => {
         dispatch(getBookDetails(bookId))
-    }, [dispatch, bookId])
+        if (!user || !user.name) {
+            dispatch(getUserDetails(book.user))
+        } else {
+            setName(user.name)
+            setEmail(user.email)
+        }
+    }, [dispatch, bookId, book])
 
     const addToCartHandler = () => {
         history.push(`/cart/${bookId}`);
@@ -48,6 +60,12 @@ const BookScreen = ({ match, history }) => {
                             <ListGroup.Item>
                                 Price: ${book.price}
                             </ListGroup.Item>
+                            <ListGroup.Item>
+                                Seller Name: {name}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                Seller Email: <a href={email}>{email}</a>
+                            </ListGroup.Item>
                         </ListGroup>
                     </Col>
                     <Col md={4}>
@@ -66,10 +84,17 @@ const BookScreen = ({ match, history }) => {
                                     </Row>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
+                                    <Row>
+                                        <Col>Status:</Col>
+                                        <Col>{book.isSold ? 'Unavailable' : 'Available'}</Col>
+                                    </Row>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
                                     <Button
                                         className="btn-block"
                                         type="button"
                                         onClick={addToCartHandler}
+                                        disabled={book.isSold}
                                     >
                                         Add to Cart
                                 </Button>

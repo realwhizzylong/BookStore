@@ -44,12 +44,9 @@ const CartScreen = ({ match, history }) => {
                                             <Image src={item.image} alt={item.title} fluid rounded />
                                         </Col>
                                         <Col md={4}>
-                                            <Link to={`/products/${item.id}`}>
+                                            <Link to={`/book/${item.id}`}>
                                                 {item.title}
                                             </Link>
-                                        </Col>
-                                        <Col md={2}>
-                                            {item.author}
                                         </Col>
                                         <Col md={2}>
                                             ${item.price}
@@ -82,7 +79,7 @@ const CartScreen = ({ match, history }) => {
                                     disabled={cartItems.length === 0}
                                     onClick={checkoutHandler}
                                 >
-                                    Place Order
+                                    Confirm Request
                                 </Button>
                             </ListGroup.Item>
                         </ListGroup>
