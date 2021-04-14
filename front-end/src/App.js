@@ -8,6 +8,7 @@ import BookPage from './pages/BookPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import CartPage from './pages/CartPage';
+import ProfilePage from './pages/ProfilePage';
 
 const App = () => {
     return (
@@ -20,6 +21,7 @@ const App = () => {
                     <Route path="/login" component={LoginPage} />
                     <Route path="/register" component={RegisterPage} />
                     <Route path="/cart/:id?" component={CartPage} />
+                    <Route path="/profile" component={ProfilePage} />
                 </Container>
             </main>
             <Footer />

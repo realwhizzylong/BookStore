@@ -6,7 +6,12 @@ import {
     REGISTER_FAIL,
     LOGOUT,
     USER_DETAILS_SUCCESS,
-    USER_DETAILS_FAIL
+    USER_DETAILS_FAIL,
+    USER_PROFILE_SUCCESS,
+    USER_PROFILE_FAIL,
+    USER_PROFILE_RESET,
+    USER_UPDATE_PROFILE_SUCCESS,
+    USER_UPDATE_PROFILE_FAIL
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -60,6 +65,9 @@ export const logout = () => async (dispatch) => {
     dispatch({
         type: LOGOUT
     })
+    dispatch({
+        type: USER_PROFILE_RESET
+    })
 }
 
 export const getUserDetails = (id) => async (dispatch) => {
@@ -72,6 +80,54 @@ export const getUserDetails = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: USER_DETAILS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const getProfile = () => async (dispatch, getState) => {
+    try {
+        const { login: { userInfo } } = getState();
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.get('users/profile', config);
+        dispatch({
+            type: USER_PROFILE_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: USER_PROFILE_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const updateProfile = (user) => async (dispatch, getState) => {
+    try {
+        const { login: { userInfo } } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.put('/users/profile', user, config);
+        dispatch({
+            type: USER_UPDATE_PROFILE_SUCCESS,
+            payload: data
+        })
+        dispatch({
+            type: LOGIN_SUCCESS,
+            payload: data
+        })
+        localStorage.setItem('userInfo', JSON.stringify(data));
+    } catch (error) {
+        dispatch({
+            type: USER_UPDATE_PROFILE_FAIL,
             payload: error.response.data.message
         })
     }

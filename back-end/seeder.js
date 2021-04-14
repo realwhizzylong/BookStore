@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import books from './data/books.js';
 import users from './data/users.js';
 import Book from './schemas/bookSchema.js';
 import User from './schemas/userSchema.js';
+import Order from './schemas/orderSchema.js';
 import Review from './schemas/reviewSchema.js';
 import connectDB from './config/db.js';
 
@@ -15,6 +15,7 @@ const importData = async () => {
     try {
         await Book.deleteMany();
         await User.deleteMany();
+        await Order.deleteMany();
         await Review.deleteMany();
 
         const allUsers = await User.insertMany(users);
@@ -37,6 +38,7 @@ const destroyData = async () => {
     try {
         await Book.deleteMany();
         await User.deleteMany();
+        await Order.deleteMany();
         await Review.deleteMany();
 
         console.log('Data destroyed.');
