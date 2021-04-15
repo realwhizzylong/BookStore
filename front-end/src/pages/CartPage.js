@@ -23,7 +23,7 @@ const CartScreen = ({ match, history }) => {
     };
 
     const checkoutHandler = () => {
-        history.push('/login?redirect=order')
+        history.push('/login?redirect=shipping')
     };
 
     return (
@@ -79,7 +79,7 @@ const CartScreen = ({ match, history }) => {
                                     disabled={cartItems.length === 0}
                                     onClick={checkoutHandler}
                                 >
-                                    Confirm Request
+                                    Proceed To Checkout
                                 </Button>
                             </ListGroup.Item>
                         </ListGroup>
