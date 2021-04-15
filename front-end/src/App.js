@@ -9,6 +9,9 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import CartPage from './pages/CartPage';
 import ProfilePage from './pages/ProfilePage';
+import ShippingPage from './pages/ShippingPage';
+import PaymentPage from './pages/PaymentPage';
+import OrderPlacementPage from './pages/OrderPlacementPage';
 
 const App = () => {
     return (
@@ -22,6 +25,9 @@ const App = () => {
                     <Route path="/register" component={RegisterPage} />
                     <Route path="/cart/:id?" component={CartPage} />
                     <Route path="/profile" component={ProfilePage} />
+                    <Route path="/shipping" component={ShippingPage} />
+                    <Route path="/payment" component={PaymentPage} />
+                    <Route path="/placeorder" component={OrderPlacementPage} />
                 </Container>
             </main>
             <Footer />

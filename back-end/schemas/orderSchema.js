@@ -9,6 +9,11 @@ const orderSchema = mongoose.Schema(
         },
         orderItems: [
             {
+                id: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    required: true,
+                    ref: 'Book'
+                },
                 title: {
                     type: String,
                     required: true
@@ -20,11 +25,6 @@ const orderSchema = mongoose.Schema(
                 price: {
                     type: String,
                     required: true
-                },
-                book: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    required: true,
-                    ref: 'Book'
                 }
             }
         ],
@@ -37,11 +37,11 @@ const orderSchema = mongoose.Schema(
                 type: String,
                 required: true
             },
-            country: {
+            zipcode: {
                 type: String,
                 required: true
             },
-            zipcode: {
+            country: {
                 type: String,
                 required: true
             }
