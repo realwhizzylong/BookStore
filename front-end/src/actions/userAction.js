@@ -63,6 +63,9 @@ export const register = (name, email, password) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
     dispatch({
         type: LOGOUT
     })
@@ -72,6 +75,7 @@ export const logout = () => async (dispatch) => {
     dispatch({
         type: MY_ORDERS_RESET
     })
+    document.location.href = '/login';
 }
 
 export const getUserDetails = (id) => async (dispatch) => {
