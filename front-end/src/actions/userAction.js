@@ -13,6 +13,7 @@ import {
     USER_UPDATE_PROFILE_SUCCESS,
     USER_UPDATE_PROFILE_FAIL
 } from '../constants/userConstants';
+import { MY_ORDERS_RESET } from '../constants/orderConstants';
 
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -67,6 +68,9 @@ export const logout = () => async (dispatch) => {
     })
     dispatch({
         type: USER_PROFILE_RESET
+    })
+    dispatch({
+        type: MY_ORDERS_RESET
     })
 }
 
