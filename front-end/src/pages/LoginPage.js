@@ -18,13 +18,13 @@ const LoginPage = ({ location, history }) => {
 
     useEffect(() => {
         if (userInfo) {
-            history.push(redirect);
+            history.push(redirect)
         }
     }, [userInfo, history, redirect])
 
     const submitHandler = (e) => {
-        e.preventDefault();
-        dispatch(login(email, password));
+        e.preventDefault()
+        dispatch(login(email, password))
     };
 
     return (

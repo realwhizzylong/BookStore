@@ -30,7 +30,7 @@ const BookScreen = ({ match, history }) => {
     }, [dispatch, bookId, book])
 
     const addToCartHandler = () => {
-        history.push(`/cart/${bookId}`);
+        history.push(`/cart/${bookId}`)
     };
 
     return (

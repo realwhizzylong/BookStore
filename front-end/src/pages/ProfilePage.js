@@ -36,14 +36,14 @@ const ProfilePage = ({ history }) => {
     }, [dispatch, history, userInfo, user, success])
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (password.length === 0) {
             setMessage("Password cannot be empty")
         } else if (password !== confirmPassword) {
-            setMessage("Password and ConfirmPassword do not match");
+            setMessage("Password and ConfirmPassword do not match")
         } else {
-            dispatch(updateProfile({ id: user._id, name, email, password }));
-            setUpdate(true);
+            dispatch(updateProfile({ id: user._id, name, email, password }))
+            setUpdate(true)
         }
     };
 

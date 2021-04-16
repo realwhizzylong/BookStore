@@ -17,9 +17,9 @@ const PaymentPage = ({ history }) => {
     const dispatch = useDispatch();
 
     const submitHandler = (e) => {
-        e.preventDefault();
-        dispatch(savePaymentMethod(paymentMethod));
-        history.push('/placeorder');
+        e.preventDefault()
+        dispatch(savePaymentMethod(paymentMethod))
+        history.push('/placeorder')
     };
 
     return (

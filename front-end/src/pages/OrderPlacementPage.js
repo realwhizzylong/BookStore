@@ -86,6 +86,24 @@ const OrderPlacementPage = ({ history }) => {
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
+                                    <Col>Item Price</Col>
+                                    <Col>${totalPrice}</Col>
+                                </Row>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Shipping Price</Col>
+                                    <Col>$0.00</Col>
+                                </Row>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Tax Price</Col>
+                                    <Col>$0.00</Col>
+                                </Row>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                <Row>
                                     <Col>Total</Col>
                                     <Col>${totalPrice}</Col>
                                 </Row>

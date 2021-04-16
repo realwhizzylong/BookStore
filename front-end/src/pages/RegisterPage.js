@@ -21,16 +21,16 @@ const RegisterPage = ({ location, history }) => {
 
     useEffect(() => {
         if (userInfo) {
-            history.push(redirect);
+            history.push(redirect)
         }
     }, [userInfo, history, redirect])
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (password !== confirmPassword) {
-            setMessage('Password and ConfirmPassword do not match');
+            setMessage('Password and ConfirmPassword do not match')
         } else {
-            dispatch(register(name, email, password));
+            dispatch(register(name, email, password))
         }
     };
 
