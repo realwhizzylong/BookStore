@@ -27,7 +27,7 @@ const BookScreen = ({ match, history }) => {
             setName(user.name)
             setEmail(user.email)
         }
-    }, [dispatch, bookId, book])
+    }, [dispatch, user, bookId, book])
 
     const addToCartHandler = () => {
         history.push(`/cart/${bookId}`)

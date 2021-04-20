@@ -19,7 +19,7 @@ const OrderPlacementPage = ({ history }) => {
         if (success) {
             history.push(`/order/${order._id}`)
         }
-    }, [success, history])
+    }, [success, order, history])
 
     const submitHandler = () => {
         dispatch(createOrder({ orderItems: cartItems, shippingAddress, paymentMethod, totalPrice }))
