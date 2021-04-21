@@ -11,6 +11,9 @@ import {
     BOOK_EDIT_RESET,
     BOOK_DELETE_SUCCESS,
     BOOK_DELETE_FAIL,
+    MY_BOOKS_SUCCESS,
+    MY_BOOKS_FAIL,
+    MY_BOOKS_RESET
 } from '../constants/bookConstants';
 
 export const bookListReducer = (state = { books: [] }, action) => {
@@ -38,6 +41,25 @@ export const bookDetailsReducer = (state = { book: { reviews: [] } }, action) =>
             return {
                 error: action.payload
             };
+        default:
+            return state;
+    }
+}
+
+export const myBooksReducer = (state = { books: [] }, action) => {
+    switch (action.type) {
+        case MY_BOOKS_SUCCESS:
+            return {
+                books: action.payload
+            };
+        case MY_BOOKS_FAIL:
+            return {
+                error: action.payload
+            };
+        case MY_BOOKS_RESET:
+            return {
+                books: []
+            }
         default:
             return state;
     }

@@ -9,7 +9,9 @@ import {
     BOOK_EDIT_SUCCESS,
     BOOK_EDIT_FAIL,
     BOOK_DELETE_SUCCESS,
-    BOOK_DELETE_FAIL
+    BOOK_DELETE_FAIL,
+    MY_BOOKS_SUCCESS,
+    MY_BOOKS_FAIL
 } from '../constants/bookConstants';
 
 export const getBooks = () => async (dispatch) => {
@@ -42,9 +44,30 @@ export const getBookDetails = (id) => async (dispatch) => {
     }
 }
 
+export const getMyBooks = () => async (dispatch, getState) => {
+    try {
+        const { login: { userInfo } } = getState();
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.get('/books/mybooks', config);
+        dispatch({
+            type: MY_BOOKS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: MY_BOOKS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
 export const createBook = (book) => async (dispatch, getState) => {
     try {
-        const { userLogin: { userInfo } } = getState();
+        const { login: { userInfo } } = getState();
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -66,7 +89,7 @@ export const createBook = (book) => async (dispatch, getState) => {
 
 export const editBook = (book) => async (dispatch, getState) => {
     try {
-        const { userLogin: { userInfo } } = getState();
+        const { login: { userInfo } } = getState();
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -91,7 +114,7 @@ export const editBook = (book) => async (dispatch, getState) => {
 
 export const deleteBook = (id) => async (dispatch, getState) => {
     try {
-        const { userLogin: { userInfo } } = getState();
+        const { login: { userInfo } } = getState();
         const config = {
             headers: {
                 Authorization: `Bearer ${userInfo.token}`

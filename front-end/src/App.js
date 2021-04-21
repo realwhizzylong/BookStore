@@ -14,6 +14,9 @@ import PaymentPage from './pages/PaymentPage';
 import OrderPlacementPage from './pages/OrderPlacementPage';
 import OrderPage from './pages/OrderPage';
 import MyOrdersPage from './pages/MyOrdersPage';
+import NewBookPage from './pages/NewBookPage';
+import MyBooksPage from './pages/MyBooksPage';
+import BookEditPage from './pages/BookEditPage';
 
 const App = () => {
     return (
@@ -22,7 +25,7 @@ const App = () => {
             <main className="py-3">
                 <Container>
                     <Route path="/" component={HomePage} exact />
-                    <Route path="/book/:id" component={BookPage} />
+                    <Route path="/book/:id" component={BookPage} exact />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/register" component={RegisterPage} />
                     <Route path="/cart/:id?" component={CartPage} />
@@ -32,6 +35,9 @@ const App = () => {
                     <Route path="/placeorder" component={OrderPlacementPage} />
                     <Route path="/order/:id" component={OrderPage} />
                     <Route path="/myorders" component={MyOrdersPage} />
+                    <Route path="/newbook" component={NewBookPage} />
+                    <Route path="/mybooks" component={MyBooksPage} />
+                    <Route path="/book/:id/edit" component={BookEditPage} exact />
                 </Container>
             </main>
             <Footer />

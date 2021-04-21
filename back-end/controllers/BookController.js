@@ -16,6 +16,11 @@ export const getBookById = asyncHandler(async (req, res) => {
     }
 })
 
+export const getMyBooks = asyncHandler(async (req, res) => {
+    const books = await Book.find({ user: req.user._id });
+    res.json(books);
+})
+
 export const createBook = asyncHandler(async (req, res) => {
     const book = new Book({
         user: req.user._id,
