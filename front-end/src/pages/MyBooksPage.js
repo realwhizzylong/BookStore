@@ -48,6 +48,7 @@ const MyBooksPage = ({ history }) => {
                                 <th>Category</th>
                                 <th>Price</th>
                                 <th>Condition</th>
+                                <th>isSold</th>
                                 <th>Details</th>
                                 <th></th>
                             </tr>
@@ -60,6 +61,13 @@ const MyBooksPage = ({ history }) => {
                                     <td>{book.category}</td>
                                     <td>${book.price}</td>
                                     <td>{book.condition}</td>
+                                    <td>
+                                        {book.isSold ? (
+                                            <i className="fas fa-check" style={{ color: 'green' }}></i>
+                                        ) : (
+                                            <i className="fas fa-times" style={{ color: 'red' }}></i>
+                                        )}
+                                    </td>
                                     <td>
                                         <LinkContainer to={`/book/${book._id}`}>
                                             <Button className="btn-sm" variant="light">Details</Button>

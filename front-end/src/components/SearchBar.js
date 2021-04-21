@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router';
 
-const Searchbar = ({ history }) => {
+const Searchbar = ({ history, type }) => {
     const [keyword, setKeyword] = useState('');
 
     const submitHandler = (e) => {
         e.preventDefault();
         if (keyword.trim()) {
-            history.push(`/search/${keyword}`);
+            history.push(`/search/${type}/${keyword}`);
         } else {
             history.push('/');
         }
@@ -20,7 +20,7 @@ const Searchbar = ({ history }) => {
                 type="text"
                 name="q"
                 onChange={e => setKeyword(e.target.value)}
-                placeholder="Search Books..."
+                placeholder={`Search by ${type}...`}
                 className="mr-sm-2 ml-sm-5"
             />
             <Button type="submit" variant="outline-success" className="p-2">

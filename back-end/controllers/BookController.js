@@ -2,7 +2,31 @@ import asyncHandler from 'express-async-handler';
 import Book from '../schemas/bookSchema.js';
 
 export const getBooks = asyncHandler(async (req, res) => {
-    const books = await Book.find({});
+    const type = req.query.type;
+    let keyword = {};
+    if (type === "title") {
+        keyword = req.query.keyword ? {
+            title: {
+                $regex: req.query.keyword,
+                $options: 'i'
+            }
+        } : {}
+    } else if (type === "author") {
+        keyword = req.query.keyword ? {
+            author: {
+                $regex: req.query.keyword,
+                $options: 'i'
+            }
+        } : {}
+    } else if (type === "category") {
+        keyword = req.query.keyword ? {
+            category: {
+                $regex: req.query.keyword,
+                $options: 'i'
+            }
+        } : {}
+    }
+    const books = await Book.find({ ...keyword });
     res.json(books);
 })
 

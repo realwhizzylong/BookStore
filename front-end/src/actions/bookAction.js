@@ -16,9 +16,11 @@ import {
     BOOK_REVIEW_FAIL
 } from '../constants/bookConstants';
 
-export const getBooks = () => async (dispatch) => {
+export const getBooks = (type = "", keyword = "") => async (dispatch) => {
     try {
-        const { data } = await axios.get('/books');
+        console.log(type)
+        console.log(keyword)
+        const { data } = await axios.get(`/books?type=${type}&keyword=${keyword}`);
         dispatch({
             type: BOOK_LIST_SUCCESS,
             payload: data
