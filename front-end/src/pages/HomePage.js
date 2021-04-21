@@ -17,7 +17,7 @@ const HomePage = ({ match }) => {
 
     useEffect(() => {
         dispatch(getBooks(type, keyword))
-    }, [dispatch, keyword])
+    }, [dispatch, type, keyword])
 
     return (
         <>

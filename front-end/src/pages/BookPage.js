@@ -3,14 +3,11 @@ import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBookDetails, addReview } from '../actions/bookAction';
-import { getUserDetails } from '../actions/userAction';
 import Rating from '../components/Rating';
 import Message from '../components/Message';
 import { BOOK_REVIEW_RESET } from '../constants/bookConstants';
 
 const BookScreen = ({ match, history }) => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
     const [rating, setRating] = useState('');
     const [comment, setComment] = useState('');
 
@@ -22,7 +19,7 @@ const BookScreen = ({ match, history }) => {
 
     const { book, error } = useSelector(state => state.bookDetails);
 
-    const { user } = useSelector(state => state.userDetails);
+    const { cartItems } = useSelector(state => state.cart);
 
     const { success, error: errorReview } = useSelector(state => state.bookReview);
 
@@ -34,13 +31,7 @@ const BookScreen = ({ match, history }) => {
             dispatch({ type: BOOK_REVIEW_RESET })
         }
         dispatch(getBookDetails(bookId))
-        if (!user || !user.name) {
-            dispatch(getUserDetails(book.user))
-        } else {
-            setName(user.name)
-            setEmail(user.email)
-        }
-    }, [dispatch, user, bookId, book, success])
+    }, [dispatch, bookId, success])
 
     const addToCartHandler = () => {
         history.push(`/cart/${bookId}`)
@@ -79,12 +70,6 @@ const BookScreen = ({ match, history }) => {
                                 <ListGroup.Item>
                                     Price: ${book.price}
                                 </ListGroup.Item>
-                                <ListGroup.Item>
-                                    Seller Name: {name}
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    Seller Email: <a href={email}>{email}</a>
-                                </ListGroup.Item>
                             </ListGroup>
                         </Col>
                         <Col md={4}>
@@ -109,14 +94,16 @@ const BookScreen = ({ match, history }) => {
                                         </Row>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
+                                        {cartItems.length > 0 &&
+                                            <Message variant="danger">You cannot have more than 1 item in cart.</Message>}
                                         <Button
                                             className="btn-block"
                                             type="button"
                                             onClick={addToCartHandler}
-                                            disabled={book.isSold}
+                                            disabled={book.isSold || cartItems.length > 0}
                                         >
                                             Add to Cart
-                                </Button>
+                                        </Button>
                                     </ListGroup.Item>
                                 </ListGroup>
                             </Card>

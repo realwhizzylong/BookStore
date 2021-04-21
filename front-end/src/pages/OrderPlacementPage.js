@@ -22,7 +22,7 @@ const OrderPlacementPage = ({ history }) => {
     }, [success, order, history])
 
     const submitHandler = () => {
-        dispatch(createOrder({ orderItems: cartItems, shippingAddress, paymentMethod, totalPrice }))
+        dispatch(createOrder({ seller: cartItems[0].seller, orderItems: cartItems, shippingAddress, paymentMethod, totalPrice }))
     };
 
     return (

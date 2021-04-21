@@ -2,28 +2,28 @@ import React, { useEffect } from 'react';
 import { Row, Col, Button, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMyOrders } from '../actions/orderAction';
+import { getSellerOrders } from '../actions/orderAction';
 import Message from '../components/Message';
 
-const MyOrdersPage = ({ history }) => {
+const MyDeliveryPage = ({ history }) => {
     const dispatch = useDispatch();
 
     const { userInfo } = useSelector(state => state.login);
 
-    const { orders, error } = useSelector(state => state.myOrders);
+    const { orders, error } = useSelector(state => state.sellerOrders);
 
     useEffect(() => {
         if (!userInfo) {
             history.push('/login');
         } else {
-            dispatch(getMyOrders())
+            dispatch(getSellerOrders())
         }
     }, [dispatch, userInfo, history])
 
     return (
         <Row className="justify-content-md-center">
             <Col md={12}>
-                <h2>My Orders</h2>
+                <h2>Orders To Be Delivered</h2>
                 {!orders ? (
                     <>
                     </>
@@ -76,4 +76,4 @@ const MyOrdersPage = ({ history }) => {
     )
 }
 
-export default MyOrdersPage;
+export default MyDeliveryPage;

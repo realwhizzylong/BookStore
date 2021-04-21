@@ -17,6 +17,7 @@ import MyOrdersPage from './pages/MyOrdersPage';
 import NewBookPage from './pages/NewBookPage';
 import MyBooksPage from './pages/MyBooksPage';
 import BookEditPage from './pages/BookEditPage';
+import MyDeliveryPage from './pages/MyDeliveryPage';
 
 const App = () => {
     return (
@@ -40,6 +41,7 @@ const App = () => {
                     <Route path="/newbook" component={NewBookPage} />
                     <Route path="/mybooks" component={MyBooksPage} />
                     <Route path="/book/:id/edit" component={BookEditPage} exact />
+                    <Route path="/mydelivery" component={MyDeliveryPage} />
                 </Container>
             </main>
             <Footer />

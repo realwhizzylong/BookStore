@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import Order from '../schemas/orderSchema.js';
 
 export const createOrder = asyncHandler(async (req, res) => {
-    const { orderItems, shippingAddress, paymentMethod, totalPrice } = req.body;
+    const { seller, orderItems, shippingAddress, paymentMethod, totalPrice } = req.body;
 
     if (orderItems && orderItems.length === 0) {
         res.status(400);
@@ -10,6 +10,7 @@ export const createOrder = asyncHandler(async (req, res) => {
     } else {
         const order = new Order({
             user: req.user._id,
+            seller,
             orderItems,
             shippingAddress,
             paymentMethod,
@@ -19,6 +20,11 @@ export const createOrder = asyncHandler(async (req, res) => {
         res.status(200);
         res.json(createdOrder);
     }
+})
+
+export const getSellerOrders = asyncHandler(async (req, res) => {
+    const orders = await Order.find({ seller: req.user._id })
+    res.json(orders);
 })
 
 export const getMyOrders = asyncHandler(async (req, res) => {
