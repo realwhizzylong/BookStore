@@ -9,7 +9,9 @@ import {
     MY_ORDERS_SUCCESS,
     MY_ORDERS_FAIL,
     SELLER_ORDERS_SUCCESS,
-    SELLER_ORDERS_FAIL
+    SELLER_ORDERS_FAIL,
+    DELIVER_ORDER_SUCCESS,
+    DELIVER_ORDER_FAIL
 } from '../constants/orderConstants';
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -117,6 +119,28 @@ export const getSellerOrders = () => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: SELLER_ORDERS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const deliverOrder = (order) => async (dispatch, getState) => {
+    try {
+        const { login: { userInfo } } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.put(`/orders/${order._id}/deliver`, {}, config);
+        dispatch({
+            type: DELIVER_ORDER_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: DELIVER_ORDER_FAIL,
             payload: error.response.data.message
         })
     }
