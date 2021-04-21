@@ -55,11 +55,11 @@ const OrderPage = ({ match }) => {
 
     const paymentHandler = (paymentResult) => {
         dispatch(payOrder(orderId, paymentResult))
+        dispatch(updateBookToSold(order.orderItems[0].id))
     };
 
     const deliverHandler = () => {
         dispatch(deliverOrder(order))
-        dispatch(updateBookToSold(order.orderItems[0].id))
     }
 
     return (

@@ -27,7 +27,9 @@ const RegisterPage = ({ location, history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (password.length === 0) {
+        if (name.length === 0) {
+            setMessage('Name cannot be empty')
+        } else if (password.length === 0) {
             setMessage('Password cannot be empty')
         } else if (password !== confirmPassword) {
             setMessage('Password and ConfirmPassword do not match')
