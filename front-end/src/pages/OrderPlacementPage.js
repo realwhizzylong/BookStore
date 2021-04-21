@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCart } from '../actions/cartAction';
 import { createOrder } from '../actions/orderAction';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
@@ -23,6 +24,7 @@ const OrderPlacementPage = ({ history }) => {
 
     const submitHandler = () => {
         dispatch(createOrder({ seller: cartItems[0].seller, orderItems: cartItems, shippingAddress, paymentMethod, totalPrice }))
+        dispatch(removeFromCart(cartItems[0].id))
     };
 
     return (
