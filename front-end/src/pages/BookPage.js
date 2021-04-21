@@ -90,7 +90,7 @@ const BookScreen = ({ match, history }) => {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Status:</Col>
-                                            <Col>{book.isSold ? 'Unavailable' : 'Available'}</Col>
+                                            <Col>{book.isSold ? 'Unavailable - Sold' : 'Available'}</Col>
                                         </Row>
                                     </ListGroup.Item>
                                     <ListGroup.Item>

@@ -121,3 +121,15 @@ export const addReview = asyncHandler(async (req, res) => {
         throw new Error('Book not found');
     }
 })
+
+export const updateBookToSold = asyncHandler(async (req, res) => {
+    const book = await Book.findById(req.params.id);
+    if (book) {
+        book.isSold = true;
+        const updatedBook = await book.save();
+        res.json(updatedBook);
+    } else {
+        res.status(404);
+        throw new Error('Book not found');
+    }
+})

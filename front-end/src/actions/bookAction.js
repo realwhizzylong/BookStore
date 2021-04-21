@@ -13,13 +13,13 @@ import {
     MY_BOOKS_SUCCESS,
     MY_BOOKS_FAIL,
     BOOK_REVIEW_SUCCESS,
-    BOOK_REVIEW_FAIL
+    BOOK_REVIEW_FAIL,
+    BOOK_SOLD_SUCCESS,
+    BOOK_SOLD_FAIL
 } from '../constants/bookConstants';
 
 export const getBooks = (type = "", keyword = "") => async (dispatch) => {
     try {
-        console.log(type)
-        console.log(keyword)
         const { data } = await axios.get(`/books?type=${type}&keyword=${keyword}`);
         dispatch({
             type: BOOK_LIST_SUCCESS,
@@ -153,6 +153,28 @@ export const addReview = (id, review) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: BOOK_REVIEW_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const updateBookToSold = (id) => async (dispatch, getState) => {
+    try {
+        const { login: { userInfo } } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.put(`/books/${id}/sold`, {}, config);
+        dispatch({
+            type: BOOK_SOLD_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: BOOK_SOLD_FAIL,
             payload: error.response.data.message
         })
     }

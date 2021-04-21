@@ -4,7 +4,9 @@ import { PayPalButton } from 'react-paypal-button-v2';
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateBookToSold } from '../actions/bookAction';
 import { deliverOrder, getOrderDetails, payOrder } from '../actions/orderAction';
+import { BOOK_SOLD_RESET } from '../constants/bookConstants';
 import { PAY_ORDER_RESET, DELIVER_ORDER_RESET } from '../constants/orderConstants';
 import Message from '../components/Message';
 
@@ -23,6 +25,8 @@ const OrderPage = ({ match }) => {
 
     const { success: successDeliver } = useSelector(state => state.deliverOrder);
 
+    const { success: successSold } = useSelector(state => state.bookSold);
+
     useEffect(() => {
         const addPayPalScript = async () => {
             const { data: clientId } = await axios.get('/config/paypal')
@@ -35,9 +39,10 @@ const OrderPage = ({ match }) => {
             }
             document.body.appendChild(script)
         }
-        if (!order || successPay || successDeliver || order._id !== orderId) {
+        if (!order || successPay || successDeliver || successSold || order._id !== orderId) {
             dispatch({ type: PAY_ORDER_RESET })
             dispatch({ type: DELIVER_ORDER_RESET })
+            dispatch({ type: BOOK_SOLD_RESET })
             dispatch(getOrderDetails(orderId))
         } else if (!order.isPaid) {
             if (!window.paypal) {
@@ -46,7 +51,7 @@ const OrderPage = ({ match }) => {
                 setSdkReady(true)
             }
         }
-    }, [dispatch, order, orderId, successPay, successDeliver])
+    }, [dispatch, order, orderId, successPay, successDeliver, successSold])
 
     const paymentHandler = (paymentResult) => {
         dispatch(payOrder(orderId, paymentResult))
@@ -54,6 +59,7 @@ const OrderPage = ({ match }) => {
 
     const deliverHandler = () => {
         dispatch(deliverOrder(order))
+        dispatch(updateBookToSold(order.orderItems[0].id))
     }
 
     return (

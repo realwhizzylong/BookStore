@@ -1,5 +1,5 @@
 import express from 'express';
-import { getBooks, getBookById, getMyBooks, createBook, updateBookById, deleteBookById, addReview } from '../controllers/BookController.js';
+import { getBooks, getBookById, getMyBooks, createBook, updateBookById, deleteBookById, addReview, updateBookToSold } from '../controllers/BookController.js';
 import { protectedRoute } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -11,6 +11,8 @@ router.post('/', protectedRoute, createBook);
 router.get('/mybooks', protectedRoute, getMyBooks);
 
 router.post('/:id/reviews', protectedRoute, addReview);
+
+router.put('/:id/sold', protectedRoute, updateBookToSold);
 
 router.get('/:id', getBookById);
 
