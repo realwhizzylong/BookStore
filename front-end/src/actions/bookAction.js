@@ -11,7 +11,9 @@ import {
     BOOK_DELETE_SUCCESS,
     BOOK_DELETE_FAIL,
     MY_BOOKS_SUCCESS,
-    MY_BOOKS_FAIL
+    MY_BOOKS_FAIL,
+    BOOK_REVIEW_SUCCESS,
+    BOOK_REVIEW_FAIL
 } from '../constants/bookConstants';
 
 export const getBooks = () => async (dispatch) => {
@@ -127,6 +129,28 @@ export const deleteBook = (id) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: BOOK_DELETE_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const addReview = (id, review) => async (dispatch, getState) => {
+    try {
+        const { login: { userInfo } } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.post(`/books/${id}/reviews`, review, config);
+        dispatch({
+            type: BOOK_REVIEW_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: BOOK_REVIEW_FAIL,
             payload: error.response.data.message
         })
     }

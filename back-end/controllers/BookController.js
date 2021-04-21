@@ -70,3 +70,30 @@ export const deleteBookById = asyncHandler(async (req, res) => {
         throw new Error('Book not found');
     }
 })
+
+export const addReview = asyncHandler(async (req, res) => {
+    const { rating, comment } = req.body;
+    const book = await Book.findById(req.params.id);
+    if (book) {
+        const userReviewed = book.reviews.find(r => r.user.toString() === req.user._id.toString());
+        if (userReviewed) {
+            res.status(400);
+            throw new Error('User has alreadly reviewed this book');
+        }
+        const review = {
+            user: req.user._id,
+            name: req.user.name,
+            rating: Number(rating),
+            comment
+        };
+        book.reviews.push(review);
+        book.numReviews = book.reviews.length;
+        book.rating = book.reviews.reduce((acc, item) => item.rating + acc, 0) / book.reviews.length;
+        await book.save();
+        res.status(201);
+        res.json({ message: 'Review added' });
+    } else {
+        res.status(404);
+        throw new Error('Book not found');
+    }
+})
