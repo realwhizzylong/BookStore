@@ -126,7 +126,7 @@ const OrderPage = ({ match }) => {
                                                             <Image src={item.image} alt={item.name} fluid rounded />
                                                         </Col>
                                                         <Col>
-                                                            <Link to={`/products/${item.product}`}>
+                                                            <Link to={`/book/${item.id}`}>
                                                                 {item.title}
                                                             </Link>
                                                         </Col>
