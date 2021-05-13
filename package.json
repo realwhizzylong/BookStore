@@ -10,7 +10,8 @@
     "client": "npm start --prefix front-end",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data-i": "node back-end/seeder",
-    "data-d": "node back-end/seeder -d"
+    "data-d": "node back-end/seeder -d",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix front-end && npm run build --prefix front-end"
   },
   "repository": {
     "type": "git",
